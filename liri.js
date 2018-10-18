@@ -35,17 +35,32 @@ if(text === "spotify-this-song"){
     }
 if(text === 'movie-this'){
     console.log("ping")
-    request("http://www.omdbapi.com/?t=" + songName + "&y=&plot=short&apikey=trilogy", function(error, response, body){
+    request("http://www.omdbapi.com/?t=" + songName + "&y=&plot=short&apikey=9affcfb7", function(error, response, body){
         if(!error && response.statusCode === 200){
             let result = JSON.parse(body)
+            console.log(result)
             console.log('Title: ' + result.Title)
             console.log('Year:' + result.Year)
             console.log('IMDB Rating: ' + result.imdbRating)
-            console.log('Rotten Tomatoes Rating: ' + result.Ratings[1].Value)
+            //console.log('Rotten Tomatoes Rating: ' + result.Ratings[1].Value)
             console.log('Country: ' + result.Country)
             console.log('Language: ' + result.Language)
             console.log('Plot: ' + result.Plot)
             console.log('Actors: ' + result.Actors)
+            }
+        })
+    }
+
+
+if(text === 'concert-this'){
+    console.log("pong")
+    request("https://rest.bandsintown.com/artists/" + songName + "/events?app_id=codingbootcamp", function(error, response, body){
+        if(!error && response.statusCode === 200){
+            let result = JSON.parse(body)
+            console.log(result.venue)
+            console.log(result.location)
+            console.log(result.datetime)
+            
             }
         })
     }
