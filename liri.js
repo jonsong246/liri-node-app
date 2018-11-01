@@ -1,6 +1,6 @@
 require("dotenv").config();
 var request = require('request')
-
+var moment = require('moment')
 var Spotify = require('node-spotify-api');
 
 const keys = require('./keys');
@@ -57,9 +57,14 @@ if(text === 'concert-this'){
     request("https://rest.bandsintown.com/artists/" + songName + "/events?app_id=codingbootcamp", function(error, response, body){
         if(!error && response.statusCode === 200){
             let result = JSON.parse(body)
-            console.log(result.venue)
-            console.log(result.location)
-            console.log(result.datetime)
+            
+            console.log(result[0].lineup[0])
+            result.forEach(element => {
+                console.log(`
+                Venue: ${element.venue.name}
+                City: ${element.venue.city}
+                Date: ${moment(element.datetime).format('MM/DD/YYYY')}`)
+            })
             
             }
         })
